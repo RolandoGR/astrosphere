@@ -25,8 +25,8 @@ export default function Blog({ data, tags }: Props) {
   function toggleTag(tag: string) {
     setFilter((prev) => 
       new Set(prev.has(tag) 
-        ? [...prev].filter((t) => t !== tag) 
-        : [...prev, tag]
+        ? Array.from(prev).filter((t) => t !== tag) 
+        : [...Array.from(prev), tag]
       )
     )
   }
