@@ -1,15 +1,15 @@
 ---
-title: "Project Two"
-summary: "Lorem ipsum dolor sit amet"
-date: "Mar 17 2022"
+title: "Sociedad Astronómica de Hermosillo"
+summary: "Sitio web informativo con galería y sección ‘Imagen del Día’ integrando la API de la NASA. Desarrollado en Astro."
+date: "Mar 18 2023"
 draft: false
 tags:
-- Svelte
-- Sveltekit
-- Typescript
-- Tailwind
+- Astro
+- JavaScript
+- NASA API
+- GitHub Pages
+demoUrl: https://rolandogr.github.io/Soc-Astronomica-Hmo3/
+repoUrl: https://github.com/RolandoGR/Soc-Astronomica-Hmo3
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+Sitio web construido para la Sociedad Astronómica de Hermosillo. Contiene una sección con imágenes diarias de la NASA, una galería de actividades locales y contenido educativo. Está desplegado en GitHub Pages y desarrollado usando Vanilla JS, CSS y HTML para una experiencia para practicar los fundamentos. El proyecto sigue en evolución y forma parte de una plataforma educativa más amplia.

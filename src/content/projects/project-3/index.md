@@ -1,12 +1,17 @@
 ---
-title: "Project Three"
-summary: "Lorem ipsum dolor sit amet"
-date: "Mar 16 2022"
+title: "Sistema de Gestión para Empresa Estética"
+summary: "Plataforma AppSheet personalizada con Apps Script para automatizar control de citas, generación de reportes y backups para una empresa local."
+date: "Mar 10 2024"
 draft: false
 tags:
-- Vue
-- Javascript
-- Tailwind
+- AppSheet
+- Apps Script
+- Automation
+- Business Tools
+demoUrl: <pendiente>
+repoUrl: <pendiente>
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+Este sistema fue diseñado para una empresa de medicina estética con recursos limitados. Utiliza AppSheet como base visual y Apps Script para extender funcionalidades críticas como generación automática de carpetas, reportes de citas, y backups. El enfoque fue ofrecer una solución de bajo costo pero altamente funcional, sin sacrificar la personalización necesaria.
+
+Capturas y demostraciones estarán disponibles próximamente.

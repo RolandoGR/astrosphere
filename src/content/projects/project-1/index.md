@@ -1,16 +1,18 @@
 ---
-title: "Project One"
-summary: "Lorem ipsum dolor sit amet"
-date: "Mar 18 2022"
+title: "Zenith Beauty"
+summary: "Sitio WordPress con sistema de citas, backend en MySQL y despliegue completo en DigitalOcean con gestión de infraestructura."
+date: "Feb 20 2024"
 draft: false
 tags:
-- Astro
-- Javascript
-- Typescript
-- Tailwind
-- SolidJs
-demoUrl: https://astro-sphere-demo.vercel.app
-repoUrl: https://github.com/markhorn-dev/astro-sphere
+- WordPress
+- MySQL
+- DigitalOcean
+- Web Infrastructure
+- UX/UI
+demoUrl: https://zenithbeauty.me
+repoUrl: <pendiente>
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+Desarrollé el sitio web de Zenith Beauty, un centro de medicina estética, desde el diseño hasta la implementación técnica. Aunque se usó WordPress, también trabajé directamente con MySQL, consola en Linux, y configuración de infraestructura en DigitalOcean: droplets, dominios, DNS, SSL y tareas de mantenimiento.
+
+Este proyecto demuestra tanto habilidades técnicas de backend como experiencia en despliegue y mantenimiento de servidores.

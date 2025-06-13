@@ -1,31 +1,17 @@
 ---
-title: "Project Four"
-summary: "Lorem ipsum dolor sit amet"
-date: "Mar 15 2022"
+title: "Scraping y Visualización de Bienes Raíces"
+summary: "Script en Python para obtener datos de propiedades en Inmuebles24 y visualizarlos geoespacialmente en Leaflet."
+date: "Jan 10 2024"
 draft: false
 tags:
-- React
-- Javascript
-- StyleX
+- Python
+- Selenium
+- Data Science
+- Pandas
+- Web Scraping
+demoUrl: <pendiente>
+repoUrl: <pendiente>
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. 
+Mediante Selenium y Python, desarrollé un sistema para scrapear datos de terrenos y propiedades desde Century21. La información se estructuró en CSVs y se visualizó en mapas interactivos usando Pandas. Este proyecto une la automatización de datos con herramientas de análisis geoespacial, útil para evaluar zonas urbanas y precios de mercado.
 
-Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. 
-
-Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. 
-Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. 
-
-Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. 
-
-Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. 
-Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. 
-
-Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. 
-
-Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. 
-Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
