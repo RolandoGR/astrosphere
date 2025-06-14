@@ -11,8 +11,6 @@ tags:
 - Aesthetic Medicine
 ---
 
-![Appsheet](./appsheet.webp)
-
 # How I Digitalized an Aesthetic Medicine Business with Free Tools
 
 In March 2024, a family friend asked me to help reorganize her aesthetic medicine business. The business, successful in its aesthetic offering, faced a major technological challenge. Everything was managed manually: physical records, handwritten logs, and a filing cabinet that was on the verge of collapse due to the accumulated information. For the staff, it was difficult to attend new patients while receiving returning ones, generating frequent complaints and delays in service.
