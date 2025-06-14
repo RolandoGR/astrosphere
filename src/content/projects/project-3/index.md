@@ -1,17 +1,19 @@
 ---
-title: "Sistema de Gestión para Empresa Estética"
-summary: "Plataforma AppSheet personalizada con Apps Script para automatizar control de citas, generación de reportes y backups para una empresa local."
-date: "Mar 10 2024"
-draft: false
-tags:
-- AppSheet
-- Apps Script
-- Automation
-- Business Tools
-demoUrl: <pendiente>
-repoUrl: <pendiente>
+title: "Management System for Aesthetic Business"  
+summary: "Custom AppSheet platform with Apps Script automation for appointment tracking, report generation, and backups for a local business."  
+date: "Mar 10 2024"  
+draft: false  
+tags:  
+- AppSheet  
+- Apps Script  
+- Automation  
+- Business Tools  
+demoUrl: <pending>  
+repoUrl: <pending>  
 ---
 
-Este sistema fue diseñado para una empresa de medicina estética con recursos limitados. Utiliza AppSheet como base visual y Apps Script para extender funcionalidades críticas como generación automática de carpetas, reportes de citas, y backups. El enfoque fue ofrecer una solución de bajo costo pero altamente funcional, sin sacrificar la personalización necesaria.
+This system was designed for a small aesthetic medicine business with limited resources. It uses **AppSheet** as the visual platform and **Apps Script** to extend core functionalities such as automatic folder creation, appointment reports, and data backups.  
 
-Capturas y demostraciones estarán disponibles próximamente.
+The focus was to deliver a **low-cost yet highly functional solution** without sacrificing the level of customization the business required.
+
+Screenshots and demos will be available soon.
