@@ -151,68 +151,40 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"01-astro-sphere-file-structure/index.md": {
-	id: "01-astro-sphere-file-structure/index.md";
-  slug: "01-astro-sphere-file-structure";
+"01-transformando-negocio-de-medicina-estetica-I/index.md": {
+	id: "01-transformando-negocio-de-medicina-estetica-I/index.md";
+  slug: "01-transformando-negocio-de-medicina-estetica-i";
   body: string;
   collection: "blog";
-  data: any
-} & { render(): Render[".md"] };
-"02-astro-sphere-getting-started/index.md": {
-	id: "02-astro-sphere-getting-started/index.md";
-  slug: "02-astro-sphere-getting-started";
-  body: string;
-  collection: "blog";
-  data: any
-} & { render(): Render[".md"] };
-"03-astro-sphere-add-new-post-or-projects/index.md": {
-	id: "03-astro-sphere-add-new-post-or-projects/index.md";
-  slug: "03-astro-sphere-add-new-post-or-projects";
-  body: string;
-  collection: "blog";
-  data: any
-} & { render(): Render[".md"] };
-"04-astro-sphere-writing-markdown/index.md": {
-	id: "04-astro-sphere-writing-markdown/index.md";
-  slug: "04-astro-sphere-writing-markdown";
-  body: string;
-  collection: "blog";
-  data: any
-} & { render(): Render[".md"] };
-"05-astro-sphere-writing-mdx/index.mdx": {
-	id: "05-astro-sphere-writing-mdx/index.mdx";
-  slug: "05-astro-sphere-writing-mdx";
-  body: string;
-  collection: "blog";
-  data: any
-} & { render(): Render[".mdx"] };
-"06-astro-sphere-social-links/index.md": {
-	id: "06-astro-sphere-social-links/index.md";
-  slug: "06-astro-sphere-social-links";
-  body: string;
-  collection: "blog";
-  data: any
-} & { render(): Render[".md"] };
-"07-transformando-negocio-de-medicina-estetica-I/index.md": {
-	id: "07-transformando-negocio-de-medicina-estetica-I/index.md";
-  slug: "07-transformando-negocio-de-medicina-estetica-i";
-  body: string;
-  collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 "2024-12-28/index.md": {
 	id: "2024-12-28/index.md";
   slug: "2024-12-28";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
-"2025-06-13 copy/index.md": {
-	id: "2025-06-13 copy/index.md";
-  slug: "2025-06-13-copy";
+"2025-06-12/index.md": {
+	id: "2025-06-12/index.md";
+  slug: "2025-06-12";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"2025-06-13/index.md": {
+	id: "2025-06-13/index.md";
+  slug: "2025-06-13";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"2025-06-14/index.md": {
+	id: "2025-06-14/index.md";
+  slug: "2025-06-14";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
 };
 "legal": {
@@ -221,51 +193,51 @@ declare module 'astro:content' {
   slug: "privacy";
   body: string;
   collection: "legal";
-  data: any
+  data: InferEntrySchema<"legal">
 } & { render(): Render[".md"] };
 "terms.md": {
 	id: "terms.md";
   slug: "terms";
   body: string;
   collection: "legal";
-  data: any
+  data: InferEntrySchema<"legal">
 } & { render(): Render[".md"] };
 };
 "projects": {
-"project-1/index.md": {
-	id: "project-1/index.md";
-  slug: "project-1";
+"med-spa/index.md": {
+	id: "med-spa/index.md";
+  slug: "med-spa";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"project-2/index.md": {
-	id: "project-2/index.md";
-  slug: "project-2";
+"patitas-unidas/index.md": {
+	id: "patitas-unidas/index.md";
+  slug: "patitas-unidas";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"project-3/index.md": {
-	id: "project-3/index.md";
-  slug: "project-3";
+"real-estate-scraper/index.md": {
+	id: "real-estate-scraper/index.md";
+  slug: "real-estate-scraper";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"project-4/index.md": {
-	id: "project-4/index.md";
-  slug: "project-4";
+"sociedad-astro-hmo/index.md": {
+	id: "sociedad-astro-hmo/index.md";
+  slug: "sociedad-astro-hmo";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
-"project-5/index.md": {
-	id: "project-5/index.md";
-  slug: "project-5";
+"zenithbauty/index.md": {
+	id: "zenithbauty/index.md";
+  slug: "zenithbauty";
   body: string;
   collection: "projects";
-  data: any
+  data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
 };
 "work": {
@@ -274,21 +246,21 @@ declare module 'astro:content' {
   slug: "blaise";
   body: string;
   collection: "work";
-  data: any
+  data: InferEntrySchema<"work">
 } & { render(): Render[".md"] };
 "garaco.md": {
 	id: "garaco.md";
   slug: "garaco";
   body: string;
   collection: "work";
-  data: any
+  data: InferEntrySchema<"work">
 } & { render(): Render[".md"] };
 "kino.md": {
 	id: "kino.md";
   slug: "kino";
   body: string;
   collection: "work";
-  data: any
+  data: InferEntrySchema<"work">
 } & { render(): Render[".md"] };
 };
 
@@ -300,5 +272,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }
