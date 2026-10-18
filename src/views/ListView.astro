@@ -1,0 +1,31 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import EntryList from "@components/EntryList"
+import { getLocalized, useTranslations, type Lang } from "@i18n/index"
+import { withoutContent } from "@lib/utils"
+
+// Blog or projects index with a tag filter
+type Props = { lang: Lang; collection: "blog" | "projects" }
+
+const { lang, collection } = Astro.props
+const t = useTranslations(lang)
+const entries = await getLocalized(collection, lang)
+const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))]
+  .sort((a, b) => a.localeCompare(b, lang))
+const title = t(`${collection}.title` as const)
+---
+
+<PageLayout title={title} description={t(`${collection}.description` as const)}>
+  <TopLayout>
+    <h1 class="animate page-heading">
+      {title}
+    </h1>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <EntryList client:load lang={lang} tags={tags} data={entries.map(withoutContent)} />
+    </div>
+  </BottomLayout>
+</PageLayout>

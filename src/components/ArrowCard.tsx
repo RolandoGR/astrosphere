@@ -1,26 +1,30 @@
 import { formatDate } from "@lib/utils"
+import { entryUrl } from "@i18n/paths"
+import { useTranslations, type Lang } from "@i18n/ui"
 import type { CollectionEntry } from "astro:content"
 
 type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">
+  lang: Lang
   pill?: boolean
 }
 
-export default function ArrowCard({entry, pill}: Props) {
+export default function ArrowCard({entry, lang, pill}: Props) {
+    const t = useTranslations(lang)
     return (
-      <a href={`/${entry.collection}/${entry.id}`} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
+      <a href={entryUrl(entry)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 hover:border-violet-500/40 dark:hover:border-violet-300/40 transition-colors duration-300 ease-in-out">
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
         <div class="flex flex-wrap items-center gap-2">
           {pill &&
             <div class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
-              {entry.collection === "blog" ? "post" : "project"}
+              {entry.collection === "blog" ? t("entry.post") : t("entry.project")}
             </div>
           }
           <div class="text-sm uppercase">
-            {formatDate(entry.data.date)}
+            {formatDate(entry.data.date, lang)}
           </div>
         </div>
-        <div class="font-semibold mt-3 text-black dark:text-white">
+        <div class="font-display font-semibold mt-3 text-black dark:text-white">
           {entry.data.title}
         </div>
 
@@ -28,7 +32,7 @@ export default function ArrowCard({entry, pill}: Props) {
           {entry.data.summary}
         </div>
         <ul class="flex flex-wrap mt-2 gap-1">
-          {entry.data.tags.map((tag:string) => ( // this line has an error; Parameter 'tag' implicitly has an 'any' type.ts(7006)
+          {entry.data.tags.map((tag) => (
             <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
               {tag}
             </li>

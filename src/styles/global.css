@@ -68,7 +68,21 @@ article {
 }
 
 .page-heading {
-  @apply font-semibold text-black dark:text-white;
+  @apply w-fit font-display text-4xl md:text-5xl font-bold tracking-tight;
+  @apply bg-gradient-to-r from-violet-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply dark:from-violet-300 dark:to-cyan-300;
+}
+
+article :is(h1, h2, h3, h4) {
+  @apply font-display tracking-tight;
+}
+
+article a {
+  @apply decoration-violet-500/60 underline-offset-2 hover:decoration-violet-500;
+}
+
+::selection {
+  @apply bg-violet-500/25;
 }
 
 .blend {

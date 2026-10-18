@@ -1,0 +1,27 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import Search from "@components/Search"
+import { getLocalized, useTranslations, type Lang } from "@i18n/index"
+import { withoutContent } from "@lib/utils"
+
+type Props = { lang: Lang }
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const data = [...await getLocalized("blog", lang), ...await getLocalized("projects", lang)]
+---
+
+<PageLayout title={t("search.title")} description={t("search.description")}>
+  <TopLayout>
+    <h1 class="animate page-heading">
+      {t("search.title")}
+    </h1>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <Search client:load lang={lang} data={data.map(withoutContent)}/>
+    </div>
+  </BottomLayout>
+</PageLayout>

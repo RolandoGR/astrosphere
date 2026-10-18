@@ -1,35 +1,12 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content"
-import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
-import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import type { CollectionEntry } from "astro:content"
+import EntryView from "@views/EntryView.astro"
+import { entryPaths } from "@i18n/index"
 
-// Create the static blog pages
-export async function getStaticPaths() {
-	const posts = await getCollection("blog", ({ data }) => !data.draft)
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}))
-}
+export const getStaticPaths = () => entryPaths("blog", "en")
 
-// Get the requested post
-type Props = CollectionEntry<"blog">
-const post = Astro.props
-const { title, summary } = post.data
+type Props = { entry: CollectionEntry<"blog"> }
+const { entry } = Astro.props
 ---
 
-<PageLayout title={title} description={summary}>
-  <TopLayout>
-    <div class="animate">
-      <ArticleTopLayout entry={post}/>
-    </div>
-  </TopLayout>
-  <BottomLayout>
-    <div class="animate">
-      <ArticleBottomLayout entry={post} />
-    </div>
-  </BottomLayout>
-</PageLayout>
+<EntryView entry={entry} />

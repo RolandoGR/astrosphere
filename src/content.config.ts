@@ -1,8 +1,22 @@
 import { defineCollection, z } from "astro:content"
 import { glob } from "astro/loaders"
 
+// Every collection has an English file and a Spanish one next to it
+// ("index.md" / "index.es.md", "kino.md" / "kino.es.md"), so both share images.
+// Entry ids are "<lang>/<slug>", e.g. "es/patitas-unidas-the-beginning".
+function localized(base: string) {
+  return glob({
+    pattern: "**/*.{md,mdx}",
+    base,
+    generateId: ({ entry }) => {
+      const [, path, lang] = entry.match(/^(.*?)(?:\.(es))?\.mdx?$/)!
+      return `${lang ?? "en"}/${path.replace(/\/index$/, "").toLowerCase()}`
+    },
+  })
+}
+
 const work = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/work" }),
+  loader: localized("./src/content/work"),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -12,7 +26,7 @@ const work = defineCollection({
 })
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
+  loader: localized("./src/content/blog"),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -23,7 +37,7 @@ const blog = defineCollection({
 })
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+  loader: localized("./src/content/projects"),
   schema: z.object({
     title: z.string(),
     summary: z.string(),
@@ -36,7 +50,7 @@ const projects = defineCollection({
 })
 
 const legal = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/legal" }),
+  loader: localized("./src/content/legal"),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),

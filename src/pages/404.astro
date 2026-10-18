@@ -1,38 +1,65 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro"
-import TwinklingStars from "@components/TwinklingStars.astro"
-import MeteorShower from "@components/MeteorShower.astro"
 ---
 
-<PageLayout title="Page not found" description="This page drifted out of orbit.">
-
-  <!-- Dark Theme: Twinkling Stars / Meteors -->
-  <div id="galaxy" class="fixed inset-0">
-    <div class="hidden dark:block">
-      <TwinklingStars/>
-      <MeteorShower/>
-    </div>
-  </div>
-
-  <section class="relative min-h-screen w-full flex items-center justify-center p-5 text-center">
-    <div class="animate">
-      <p class="text-7xl md:text-9xl font-bold text-black dark:text-white">
-        404
-      </p>
-      <p class="mt-4 text-lg md:text-xl font-semibold text-black dark:text-white">
-        Lost in space
-      </p>
-      <p class="mt-2 opacity-75">
-        This page drifted out of orbit, or it never existed.
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center mt-8">
-        <a href="/" class="py-2 px-4 rounded text-sm md:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend">
-          Back to home
-        </a>
-        <a href="/search" class="py-2 px-4 rounded text-sm md:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
-          Search the site
-        </a>
+<!-- GitHub Pages serves this one page for every missing URL, so the
+     Spanish text is swapped in on the client for paths under /es/ -->
+<PageLayout title="Page not found" description="This page drifted out of orbit." alternates={false}>
+  <section id="lost" class="relative h-svh min-h-[520px] w-full overflow-hidden bg-[#f3f0ff] dark:bg-[#05040f]">
+    <canvas class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+    <div class="relative flex h-full items-center justify-center p-5 text-center font-display">
+      <div>
+        <h1 class="animate text-8xl md:text-[10rem] font-bold leading-none tracking-tight bg-gradient-to-r from-violet-600 to-cyan-600 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
+          404
+        </h1>
+        <p class="animate mt-4 text-xl md:text-2xl font-semibold text-black dark:text-white" data-es="Perdido en el espacio">
+          Lost in space
+        </p>
+        <p class="animate mt-2 text-black/70 dark:text-white/75" data-es="Esta página salió de órbita, o nunca existió.">
+          This page drifted out of orbit, or it never existed.
+        </p>
+        <div class="animate flex flex-wrap gap-3 justify-center mt-8">
+          <a href="/" data-es-href="/es/" data-es="Volver al inicio" class="rounded-md bg-gradient-to-r from-violet-600 to-cyan-600 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
+            Back to home
+          </a>
+          <a href="/search" data-es-href="/es/search" data-es="Buscar en el sitio" class="rounded-md border border-black/20 px-4 py-2 text-sm text-black hover:bg-black/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10 md:text-base blend">
+            Search the site
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </PageLayout>
+
+<script>
+  import { createGalaxy } from "@lib/galaxy"
+
+  if (location.pathname.startsWith("/es/")) {
+    document.documentElement.lang = "es"
+    document.title = "Página no encontrada | Rolando García Ramos"
+    document.querySelectorAll<HTMLElement>("[data-es]").forEach((el) => (el.textContent = el.dataset.es!))
+    document.querySelectorAll<HTMLAnchorElement>("[data-es-href]").forEach((a) => (a.href = a.dataset.esHref!))
+  }
+
+  const section = document.getElementById("lost")!
+  const galaxy = createGalaxy(section.querySelector("canvas")!, {
+    count: 2600,
+    center: (w, h) => [w / 2, h / 2],
+    radius: (w, h) => Math.min(w * 0.45, h * 0.6),
+  })
+  const isDark = () => document.documentElement.classList.contains("dark")
+  galaxy.setTheme(isDark())
+  new MutationObserver(() => galaxy.setTheme(isDark()))
+    .observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  new ResizeObserver(() => {
+    galaxy.resize(section.clientWidth, section.clientHeight)
+    if (reduced) galaxy.draw(performance.now())
+  }).observe(section)
+
+  const frame = (t: number) => {
+    galaxy.draw(t)
+    if (!reduced) requestAnimationFrame(frame)
+  }
+  requestAnimationFrame(frame)
+</script>

@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
+import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+import { entryImage } from "@i18n/index"
+import { entryPage } from "@lib/structured-data"
+
+// A blog post or project page
+type Props = { entry: CollectionEntry<"blog"> | CollectionEntry<"projects"> }
+
+const { entry } = Astro.props
+const { title, summary } = entry.data
+const image = entryImage(entry)
+---
+
+<PageLayout title={title} description={summary} image={image} type="article" jsonLd={entryPage(Astro.site!, entry, image)}>
+  <TopLayout>
+    <div class="animate">
+      <ArticleTopLayout entry={entry}/>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <ArticleBottomLayout entry={entry} />
+    </div>
+  </BottomLayout>
+</PageLayout>

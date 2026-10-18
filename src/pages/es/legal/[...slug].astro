@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from "astro:content"
+import LegalView from "@views/LegalView.astro"
+import { entryPaths } from "@i18n/index"
+
+export const getStaticPaths = () => entryPaths("legal", "es")
+
+type Props = { entry: CollectionEntry<"legal"> }
+const { entry } = Astro.props
+---
+
+<LegalView entry={entry} />
