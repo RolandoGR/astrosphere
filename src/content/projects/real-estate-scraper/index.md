@@ -10,7 +10,7 @@ tags:
 - Pandas  
 - Web Scraping  
 ---
-![real-estate-summary](./real-estate-dashboard.png)
+![Real estate analysis summary for Hermosillo: 79 properties, median sale price of 5.58M MXN and median rent of 21,000 MXN](./real-estate-dashboard.png)
 <center><i>Real state scraper summary</i></center>
 
 Using **Python** and **Selenium**, I developed a system to scrape data on land and property listings—originally from **Century21**—to help a **construction company** monitor real estate offerings more efficiently. The objective was to automate the process of identifying what properties are currently on the market and at what prices, instead of relying on manual daily reviews.
@@ -25,5 +25,5 @@ The data is structured into **CSV files** and then visualized through **interact
 
 While platforms like Facebook Marketplace restrict scraping, the same approach can be applied to a wide range of public real estate websites to create valuable tools for market analysis and urban development strategy.
 
-![real-estate-dashboard](./real-estate-dashboard2.png)
+![Interactive dashboard with a property map of Hermosillo, price distribution, median prices by neighborhood and price vs. bedrooms](./real-estate-dashboard2.png)
 <center><i>Real state scraper dashboard</i></center>

@@ -12,7 +12,7 @@ tags:
 demoUrl: https://zenithbeauty.me  
 ---
 
-![Zenith-Home](./zenith-home.png)  
+![Zenith Beauty home page with the headline “Rejuvenece tu piel y tu cuerpo” and a booking button](./zenith-home.png)  
 <center><i>Homepage</i></center>  
 
 I developed the website for **Zenith Beauty**, an aesthetic medicine center, managing every phase from planning and design to full deployment and infrastructure maintenance.
@@ -30,6 +30,6 @@ I developed the website for **Zenith Beauty**, an aesthetic medicine center, man
 
 ### Screenshots
 
-| ![Zenith-Agenda](./zenith-agenda.png) | ![Zenith-Mobile](./zenith-mobile.png) |
+| ![Appointment booking form with a service selector, calendar and available time slots](./zenith-agenda.png) | ![Mobile view of the Zenith Beauty services page](./zenith-mobile.png) |
 |:--:|:--:|
 | *Appointment System* | *Mobile View* |

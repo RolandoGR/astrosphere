@@ -13,7 +13,7 @@ tags:
 demoUrl: https://patitas-unidas-connect.lovable.app/
 repoUrl: https://github.com/RolandoGR/patitas_flutter
 ---
-[![Patitas-Unidas-Demo](patitas-unidas-demo.png)](https://patitas-unidas-connect.lovable.app/)
+[![Patitas Unidas home page with a cat and dog photo and a live map of lost pet reports in Hermosillo](patitas-unidas-demo.png)](https://patitas-unidas-connect.lovable.app/)
 <center><i>Patitas unidas demo (done with lovable)</i></center>
 
 
@@ -34,5 +34,5 @@ The app was developed in just **36 hours** as part of a multidisciplinary team, 
 This project reflects adaptability, initiative, and a strong foundation in mobile app development—especially in high-pressure, time-sensitive contexts like hackathons.
 
 
-[![Smart-city-hackathon](./smart-city-hackathon.png)](https://www.hackathonhmo.com/)
+[![Smart City Hackathon Hermosillo 2025 landing page, April 29–30](./smart-city-hackathon.png)](https://www.hackathonhmo.com/)
 <center><i>Developed during the Smart City Hackathon (36-hour sprint)</i></center>

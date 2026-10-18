@@ -11,7 +11,7 @@ tags:
 - Aesthetic Medicine
 ---
 
-![Appsheet](./appsheet.webp)
+![Google Cloud and AppSheet logos on a blue background](./appsheet.webp)
 
 # How I Digitalized an Aesthetic Medicine Business with Free Tools
 

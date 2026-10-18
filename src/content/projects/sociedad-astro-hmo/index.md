@@ -13,7 +13,7 @@ demoUrl: https://rolandogr.github.io/Soc-Astronomica-Hmo3/
 repoUrl: https://github.com/RolandoGR/Soc-Astronomica-Hmo3  
 
 ---
-![galeria-astro](./galeria.png)  
+![Monthly gallery grid of astronomy photos: galaxies, nebulae, a solar eclipse and planets](./galeria.png)  
 <center><i>Image of the day gallery</i></center>  
 
 Website developed for the **Astronomical Society of Hermosillo**, featuring daily space images from NASA’s API, a gallery of local astronomy-related activities, and educational content.
@@ -30,5 +30,5 @@ The project was built from scratch using **Vanilla JavaScript**, **HTML**, and *
 
 This is an evolving project that reflects a continued commitment to learning, improving code quality, and deepening understanding of web technologies beyond frameworks.
 
-![astro-homepage](./homepage.png)
+![Astronomical Society of Hermosillo home page over a night desert landscape](./homepage.png)
 <center><i>Sociedad Astronómica Homepage</i></center>  
