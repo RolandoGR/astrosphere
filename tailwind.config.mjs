@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         "sans": ["Atkinson", ...defaultTheme.fontFamily.sans],
+        "display": ["Space Grotesk Variable", ...defaultTheme.fontFamily.sans],
       },
       typography: {
         DEFAULT: {
