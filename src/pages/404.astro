@@ -32,7 +32,7 @@ import PageLayout from "@layouts/PageLayout.astro"
 </PageLayout>
 
 <script>
-  import { createGalaxy } from "@lib/galaxy"
+  import { mountGalaxy } from "@lib/galaxy-mount"
 
   if (location.pathname.startsWith("/es/")) {
     document.documentElement.lang = "es"
@@ -42,24 +42,10 @@ import PageLayout from "@layouts/PageLayout.astro"
   }
 
   const section = document.getElementById("lost")!
-  const galaxy = createGalaxy(section.querySelector("canvas")!, {
-    count: 2600,
-    center: (w, h) => [w / 2, h / 2],
+  mountGalaxy(section, {
+    stars: section.clientWidth < 640 ? 20000 : 40000,
+    fallbackStars: 2600,
+    center: (w, h) => [w / 2, h * 0.4],
     radius: (w, h) => Math.min(w * 0.45, h * 0.6),
   })
-  const isDark = () => document.documentElement.classList.contains("dark")
-  galaxy.setTheme(isDark())
-  new MutationObserver(() => galaxy.setTheme(isDark()))
-    .observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  new ResizeObserver(() => {
-    galaxy.resize(section.clientWidth, section.clientHeight)
-    if (reduced) galaxy.draw(performance.now())
-  }).observe(section)
-
-  const frame = (t: number) => {
-    galaxy.draw(t)
-    if (!reduced) requestAnimationFrame(frame)
-  }
-  requestAnimationFrame(frame)
 </script>

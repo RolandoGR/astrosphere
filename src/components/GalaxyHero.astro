@@ -37,65 +37,17 @@ const t = useTranslations(lang)
 </section>
 
 <script>
-  import { createGalaxy } from "@lib/galaxy"
+  import { mountGalaxy } from "@lib/galaxy-mount"
 
   const hero = document.getElementById("hero")!
-  const canvas = hero.querySelector("canvas")!
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const wide = (w: number) => w >= 768
+  const small = hero.clientWidth < 640
 
-  const galaxy = createGalaxy(canvas, {
-    count: hero.clientWidth < 640 ? 2400 : 4200,
-    center: (w, h) => wide(w) ? [w * 0.66, h * 0.48] : [w * 0.5, h * 0.3],
-    radius: (w, h) => wide(w) ? Math.min(w * 0.3, h * 0.55) : Math.min(w * 0.55, h * 0.4),
-  })
-
-  const isDark = () => document.documentElement.classList.contains("dark")
-  galaxy.setTheme(isDark())
-
-  let raf = 0
-  let visible = true
-  const frame = (t: number) => {
-    galaxy.draw(t)
-    raf = requestAnimationFrame(frame)
-  }
-  const start = () => {
-    if (reduced) galaxy.draw(performance.now())
-    else if (!raf) raf = requestAnimationFrame(frame)
-  }
-  const stop = () => {
-    cancelAnimationFrame(raf)
-    raf = 0
-  }
-  const redrawIfIdle = () => {
-    if (reduced || !visible) galaxy.draw(performance.now())
-  }
-
-  new ResizeObserver(() => {
-    galaxy.resize(hero.clientWidth, hero.clientHeight)
-    redrawIfIdle()
-  }).observe(hero)
-
-  // Only animate while the hero is on screen
-  new IntersectionObserver(([entry]) => {
-    visible = entry.isIntersecting
-    if (visible) start()
-    else stop()
-  }).observe(hero)
-
-  new MutationObserver(() => {
-    galaxy.setTheme(isDark())
-    redrawIfIdle()
-  }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
-
-  const local = (e: PointerEvent | MouseEvent) => {
-    const rect = hero.getBoundingClientRect()
-    return [e.clientX - rect.left, e.clientY - rect.top] as const
-  }
-  hero.addEventListener("pointermove", (e) => galaxy.pointer(...local(e)))
-  hero.addEventListener("pointerleave", () => galaxy.leave())
-  hero.addEventListener("click", (e) => {
-    if (reduced || (e.target as Element).closest("a, button")) return
-    galaxy.supernova(...local(e))
+  mountGalaxy(hero, {
+    stars: small ? 26000 : 60000,
+    fallbackStars: small ? 2400 : 4200,
+    scroll: true,
+    center: (w, h) => wide(w) ? [w * 0.7, h * 0.48] : [w * 0.5, h * 0.3],
+    radius: (w, h) => wide(w) ? Math.min(w * 0.34, h * 0.6) : Math.min(w * 0.55, h * 0.4),
   })
 </script>
