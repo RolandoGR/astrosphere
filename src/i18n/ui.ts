@@ -6,7 +6,7 @@ export const defaultLang: Lang = "en"
 
 export const ui = {
   en: {
-    "site.description": "Software and industrial engineer in Hermosillo, Mexico. I build automation, data and web tools that help small businesses and communities work better.",
+    "site.description": "Software and industrial engineer and educator in Hermosillo, Mexico. I help businesses and schools adopt innovation: choosing the right technology, fitting it to how people work and making sure it sticks.",
     "nav.home": "Home",
     "nav.work": "Work",
     "nav.blog": "Blog",
@@ -41,7 +41,7 @@ export const ui = {
     "entry.next": "Next",
     "home.title": "Home",
     "home.hello": "Hello, I'm",
-    "home.tagline": "Software & industrial engineer building automation, data and web tools.",
+    "home.tagline": "Software & industrial engineer helping businesses and schools adopt innovation.",
     "home.cta.work": "View my work",
     "home.cta.blog": "Read my blog",
     "home.hint": "Move to tilt the galaxy · click for a supernova",
@@ -65,7 +65,7 @@ export const ui = {
     "og.projects": "Project",
   },
   es: {
-    "site.description": "Ingeniero de software e industrial en Hermosillo, México. Creo herramientas de automatización, datos y web que ayudan a pequeños negocios y comunidades a trabajar mejor.",
+    "site.description": "Ingeniero de software e industrial y docente en Hermosillo, México. Ayudo a empresas e instituciones educativas a adoptar la innovación: elegir la tecnología adecuada, adaptarla a su forma de trabajar y lograr que se quede.",
     "nav.home": "Inicio",
     "nav.work": "Experiencia",
     "nav.blog": "Blog",
@@ -100,7 +100,7 @@ export const ui = {
     "entry.next": "Siguiente",
     "home.title": "Inicio",
     "home.hello": "Hola, soy",
-    "home.tagline": "Ingeniero de software e industrial: creo herramientas de automatización, datos y web.",
+    "home.tagline": "Ingeniero de software e industrial: ayudo a empresas y escuelas a adoptar la innovación.",
     "home.cta.work": "Ver mi experiencia",
     "home.cta.blog": "Leer mi blog",
     "home.hint": "Mueve el cursor para inclinar la galaxia · haz clic para una supernova",
