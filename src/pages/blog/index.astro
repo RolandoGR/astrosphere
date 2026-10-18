@@ -5,6 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Blog from "@components/Blog"
 import { BLOG } from "@consts"
+import { withoutContent } from "@lib/utils"
 
 const posts = (await getCollection("blog"))
   .filter(post => !post.data.draft)
@@ -22,7 +23,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))]
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Blog client:load tags={tags} data={posts} />
+      <Blog client:load tags={tags} data={posts.map(withoutContent)} />
     </div>
   </BottomLayout>
 </PageLayout>

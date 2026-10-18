@@ -5,6 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Projects from "@components/Projects"
 import { PROJECTS } from "@consts"
+import { withoutContent } from "@lib/utils"
 
 const projects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
@@ -22,7 +23,7 @@ const tags = [...new Set(projects.flatMap(project => project.data.tags))]
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Projects client:load tags={tags} data={projects} />
+      <Projects client:load tags={tags} data={projects.map(withoutContent)} />
     </div>
   </BottomLayout>
 </PageLayout>

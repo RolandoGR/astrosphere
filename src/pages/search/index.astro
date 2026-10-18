@@ -5,6 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Search from "@components/Search"
 import { SEARCH } from "@consts"
+import { withoutContent } from "@lib/utils"
 
 const posts = (await getCollection("blog"))
   .filter(post => !post.data.draft)
@@ -23,7 +24,7 @@ const data = [...posts, ...projects] as CollectionEntry<"blog">[]
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Search client:load data={data}/>
+      <Search client:load data={data.map(withoutContent)}/>
     </div>
   </BottomLayout>
 </PageLayout>
