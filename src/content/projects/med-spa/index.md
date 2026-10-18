@@ -8,8 +8,6 @@ tags:
 - Apps Script  
 - Automation  
 - Business Tools  
-demoUrl: <pending>  
-repoUrl: <pending>  
 ---
 
 This system was designed for a small aesthetic medicine business with limited resources. It uses **AppSheet** as the visual platform and **Apps Script** to extend core functionalities such as automatic folder creation, appointment reports, and data backups.  

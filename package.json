@@ -9,9 +9,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "preview:network": "astro preview --host",
-    "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "astro": "astro"
   },
   "dependencies": {
     "astro": "^4.0.0",

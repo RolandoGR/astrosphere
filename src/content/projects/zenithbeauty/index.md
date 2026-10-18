@@ -10,7 +10,6 @@ tags:
 - Web Infrastructure  
 - UX/UI  
 demoUrl: https://zenithbeauty.me  
-repoUrl: <pending>  
 ---
 
 ![Zenith-Home](./zenith-home.png)  

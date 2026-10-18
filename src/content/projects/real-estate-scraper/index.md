@@ -9,8 +9,6 @@ tags:
 - Data Science  
 - Pandas  
 - Web Scraping  
-demoUrl: <pending>  
-repoUrl: <pending>  
 ---
 ![real-estate-summary](./real-estate-dashboard.png)
 <center><i>Real state scraper summary</i></center>

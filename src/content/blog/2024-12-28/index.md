@@ -2,7 +2,7 @@
 title: "Transforming an Aesthetic Medicine Business: Part II"
 summary: "In this article, I share how I helped a family friend transform her aesthetic medicine business using free and low-cost technological tools. We identified key problems such as manual file management and lack of digitalization, and used platforms like Google AppSheet, AppScripts, and Google Forms to create customized solutions. Discover how these tools not only improved operational efficiency but also optimized the staff's time and resources."
 date: "Dec 30 2024"
-draft: false
+draft: true # TODO: contenido duplicado de la Parte I; escribir la Parte II real
 tags:
 - Digitalization
 - Automation
