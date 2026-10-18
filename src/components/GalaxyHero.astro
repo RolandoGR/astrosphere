@@ -1,5 +1,8 @@
 ---
-import "@fontsource-variable/space-grotesk"
+import { langFromUrl, localizePath, useTranslations } from "@i18n/index"
+
+const lang = langFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <section id="hero" class="relative h-svh min-h-[560px] w-full overflow-hidden bg-[#f3f0ff] dark:bg-[#05040f]">
@@ -7,7 +10,7 @@ import "@fontsource-variable/space-grotesk"
   <div class="relative mx-auto flex h-full max-w-screen-lg items-end px-5 pb-[12vh] md:items-center md:pb-0">
     <div class="pointer-events-none max-w-xl font-display">
       <p class="animate text-sm uppercase tracking-[0.28em] text-violet-700 dark:text-indigo-300 md:text-base">
-        Hello, I'm
+        {t("home.hello")}
       </p>
       <h1 class="animate mt-3 text-5xl font-bold leading-[0.95] tracking-tight text-black dark:text-white md:text-7xl">
         Rolando<br/>
@@ -16,20 +19,20 @@ import "@fontsource-variable/space-grotesk"
         </span>
       </h1>
       <p class="animate mt-4 text-base text-black/70 dark:text-white/75 md:text-lg">
-        Software &amp; industrial engineer building automation, data and web tools.
+        {t("home.tagline")}
       </p>
       <div class="animate pointer-events-auto mt-6 flex flex-wrap gap-3">
-        <a href="/work" class="rounded-md bg-gradient-to-r from-violet-600 to-cyan-600 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
-          View my work
+        <a href={localizePath("/work", lang)} class="rounded-md bg-gradient-to-r from-violet-600 to-cyan-600 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
+          {t("home.cta.work")}
         </a>
-        <a href="/blog" class="rounded-md border border-black/20 px-4 py-2 text-sm text-black hover:bg-black/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10 md:text-base blend">
-          Read my blog
+        <a href={localizePath("/blog", lang)} class="rounded-md border border-black/20 px-4 py-2 text-sm text-black hover:bg-black/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10 md:text-base blend">
+          {t("home.cta.blog")}
         </a>
       </div>
     </div>
   </div>
   <p class="pointer-events-none absolute bottom-4 right-5 hidden text-xs text-black/40 dark:text-white/40 md:block">
-    Move to tilt the galaxy · click for a supernova
+    {t("home.hint")}
   </p>
 </section>
 

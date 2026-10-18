@@ -1,22 +1,28 @@
 ---
-import { SITE, LINKS } from "@consts"
+import { LINKS } from "@consts"
 import { cn } from "@lib/utils"
-const { pathname } = Astro.url
-const subpath = pathname.match(/[^/]+/g)
+import { barePath, langFromUrl, localizePath, switchLangPath, useTranslations } from "@i18n/index"
 import Container from "@components/Container.astro"
+import Wordmark from "@components/Wordmark.astro"
+
+const lang = langFromUrl(Astro.url)
+const t = useTranslations(lang)
+const other = lang === "en" ? "es" : "en"
+const pathname = barePath(Astro.url)
+const subpath = pathname.match(/[^/]+/g)
+const isActive = (href: string) => pathname === href || "/" + subpath?.[0] === href
+const button = cn("size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")
 ---
 
 <header id="header" class="fixed top-0 w-full h-16 z-50 ">
   <Container size="md">
     <div class="relative h-full w-full">
       <div class="absolute left-0 top-1/2 -translate-y-1/2 flex gap-1 font-semibold">
-        <a href="/" class="flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+        <a href={localizePath("/", lang)} class="flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
           <svg class="size-6 fill-current">
             <use href="/brand.svg#brand"></use>
           </svg>
-          <div>
-            {SITE.TITLE}
-          </div>
+          <Wordmark />
         </a>
       </div>
 
@@ -24,8 +30,8 @@ import Container from "@components/Container.astro"
       <nav class="hidden md:flex items-center justify-center text-sm gap-1">
         {
           LINKS.map((LINK) => (
-            <a href={LINK.HREF} class={cn("h-8 rounded-full px-3 text-current", "flex items-center justify-center", "transition-colors duration-300 ease-in-out", pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
-              {LINK.TEXT}
+            <a href={localizePath(LINK.HREF, lang)} class={cn("h-8 rounded-full px-3 text-current", "flex items-center justify-center", "transition-colors duration-300 ease-in-out", isActive(LINK.HREF) ? "bg-black dark:bg-white text-white dark:text-black" : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white")}>
+              {t(LINK.KEY)}
             </a>
           ))
         }
@@ -33,19 +39,23 @@ import Container from "@components/Container.astro"
     </div>
 
     <div class="buttons absolute right-0 top-1/2 -translate-y-1/2 flex gap-1">
-      <a href="/search" aria-label={`Search blog posts and projects on ${SITE.TITLE}`} class={cn("hidden md:flex", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out", pathname === "/search" || "/" + subpath?.[0] === "/search" ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
+      <a href={switchLangPath(Astro.url, other)} hreflang={other} aria-label={t("nav.switch")} title={t("nav.switch")} class={cn("flex text-xs font-semibold", button)}>
+        {other.toUpperCase()}
+      </a>
+
+      <a href={localizePath("/search", lang)} aria-label={t("nav.search")} class={cn("hidden md:flex", button, isActive("/search") ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black" : "")}>
         <svg class="size-full">
           <use href="/ui.svg#search"></use>
         </svg>
       </a>
 
-      <a href="/rss.xml" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class={cn("hidden md:flex", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+      <a href={localizePath("/rss.xml", lang)} target="_blank" aria-label={t("nav.rss")} class={cn("hidden md:flex", button)}>
         <svg class="size-full">
           <use href="/ui.svg#rss"></use>
         </svg>
       </a>
 
-      <button id="header-theme-button" aria-label={`Toggle light and dark theme`} class={cn("hidden md:flex", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+      <button id="header-theme-button" aria-label={t("nav.theme")} class={cn("hidden md:flex", button)}>
         <svg class="size-full block dark:hidden">
           <use href="/ui.svg#sun"></use>
         </svg>
@@ -54,7 +64,7 @@ import Container from "@components/Container.astro"
         </svg>
       </button>
 
-      <button id="header-drawer-button" aria-label={`Toggle drawer open and closed`} class={cn("flex md:hidden", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+      <button id="header-drawer-button" aria-label={t("nav.menu")} class={cn("flex md:hidden", button)}>
         <svg id="drawer-open" class="size-full">
           <use href="/ui.svg#menu"></use>
         </svg>

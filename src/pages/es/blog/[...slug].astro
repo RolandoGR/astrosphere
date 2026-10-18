@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from "astro:content"
+import EntryView from "@views/EntryView.astro"
+import { entryPaths } from "@i18n/index"
+
+export const getStaticPaths = () => entryPaths("blog", "es")
+
+type Props = { entry: CollectionEntry<"blog"> }
+const { entry } = Astro.props
+---
+
+<EntryView entry={entry} />

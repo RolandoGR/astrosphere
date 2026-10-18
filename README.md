@@ -17,7 +17,7 @@ pnpm preview    # serve the built site
 
 ## Content
 
-All content lives in `src/content/` as Markdown:
+All content lives in `src/content/` as Markdown, in English and Spanish. Each entry has an English file and a Spanish one next to it (`index.md` and `index.es.md`, or `kino.md` and `kino.es.md`), sharing the same images. English pages are served at the root and Spanish ones under `/es/`; the folder name is the URL slug in both languages.
 
 | Folder      | What it is                                  |
 | ----------- | ------------------------------------------- |
@@ -27,8 +27,8 @@ All content lives in `src/content/` as Markdown:
 | `legal/`    | Terms and privacy pages                     |
 
 Set `draft: true` in a post or project's frontmatter to hide it from the site and RSS feed.
-Site-wide text, navigation and social links are in `src/consts.ts`.
+Interface text for both languages is in `src/i18n/ui.ts`; navigation and social links are in `src/consts.ts`. Each post and project gets a social preview image generated at build time (`src/pages/og/`).
 
 ## Deployment
 
-Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`. The custom domain is set in `public/CNAME`.
+Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`. Pull requests are type-checked and built by `.github/workflows/check.yml`, and Dependabot opens weekly dependency updates. The custom domain is set in `public/CNAME`.

@@ -1,23 +1,26 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { useTranslations, type Lang } from "@i18n/ui"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("en-US", {
+const locales: Record<Lang, string> = { en: "en-US", es: "es-MX" }
+
+export function formatDate(date: Date, lang: Lang = "en") {
+  return Intl.DateTimeFormat(locales[lang], {
     month: "short",
     day: "2-digit",
     year: "numeric"
   }).format(date)
 }
 
-export function readingTime(html: string) {
+export function readingTime(html: string, lang: Lang = "en") {
   const textOnly = html.replace(/<[^>]+>/g, "")
   const wordCount = textOnly.split(/\s+/).length
   const readingTimeMinutes = ((wordCount / 200) + 1).toFixed()
-  return `${readingTimeMinutes} min read`
+  return useTranslations(lang)("entry.minutes", { n: readingTimeMinutes })
 }
 
 // Drop the raw and rendered content from an entry before passing it to a

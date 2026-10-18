@@ -1,0 +1,150 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import ArrowCard from "@components/ArrowCard"
+import StackCard from "@components/StackCard.astro"
+import GalaxyHero from "@components/GalaxyHero.astro"
+import { SOCIALS } from "@consts"
+import { getLocalized, localizePath, useTranslations, type Lang } from "@i18n/index"
+import { homePage } from "@lib/structured-data"
+
+type Props = { lang: Lang }
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const posts = (await getLocalized("blog", lang)).slice(0, 3)
+const projects = (await getLocalized("projects", lang)).slice(0, 3)
+
+const stack = [
+  { text: "Astro", icon: "astro", href: "https://astro.build" },
+  { text: "Javascript", icon: "javascript", href: "https://www.javascript.com" },
+  { text: "Typescript", icon: "typescript", href: "https://www.typescriptlang.org" },
+  { text: "Tailwind", icon: "tailwind", href: "https://tailwindcss.com" },
+]
+
+const heading = "font-display text-lg font-semibold text-black dark:text-white"
+const link = "w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+const linkText = "text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend"
+const strong = "text-black dark:text-white"
+const email = "underline decoration-violet-500/60 underline-offset-2 hover:decoration-violet-500"
+---
+
+<PageLayout title={t("home.title")} description={t("site.description")} jsonLd={homePage(Astro.site!, lang, t("site.description"))}>
+
+  <GalaxyHero />
+
+  <div class="relative bg-white dark:bg-black">
+    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+
+      <!-- About Section -->
+      <section class="animate">
+        {lang === "es" ? (
+          <>
+            <p class="text-lg text-black dark:text-white">
+              Soy ingeniero y profesor universitario en Hermosillo, México. Convierto procesos de papel y hojas de cálculo en herramientas que la gente realmente usa, y enseño a otros a hacer lo mismo.
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li><b class={strong}>Construyo</b> automatizaciones, tableros de datos y aplicaciones web con Python, JavaScript y Astro.</li>
+              <li><b class={strong}>Enseño</b> estadística, inteligencia de negocios e ingeniería de procesos en la Universidad Kino.</li>
+              <li><b class={strong}>Últimamente</b> he estado analizando el mercado inmobiliario de Hermosillo y desarrollando Patitas Unidas, una app para mascotas perdidas que nació en un hackathon.</li>
+              <li><b class={strong}>Estoy disponible</b> para proyectos freelance y colaboraciones. <a href="mailto:rolandogr.dev@gmail.com" class={email}>Escríbeme</a>.</li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p class="text-lg text-black dark:text-white">
+              I'm an engineer and university lecturer from Hermosillo, Mexico. I turn paper-and-spreadsheet processes into tools people actually use, and I teach others to do the same.
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li><b class={strong}>I build</b> automation, data dashboards and web apps with Python, JavaScript and Astro.</li>
+              <li><b class={strong}>I teach</b> statistics, business intelligence and process engineering at Universidad Kino.</li>
+              <li><b class={strong}>Lately</b> I've been mapping Hermosillo's housing market and building Patitas Unidas, a lost-pet app born at a hackathon.</li>
+              <li><b class={strong}>I'm open to</b> freelance projects and collaborations. <a href="mailto:rolandogr.dev@gmail.com" class={email}>Email me</a>.</li>
+            </ul>
+          </>
+        )}
+      </section>
+
+      <!-- Blog Preview Section -->
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between items-baseline">
+            <h2 class={heading}>{t("home.recent.posts")}</h2>
+            <a href={localizePath("/blog", lang)} class={link}>
+              <span class={linkText}>{t("home.all.posts")}</span>
+            </a>
+          </div>
+          <ul class="space-y-4">
+            {posts.map((post) => (
+              <li>
+                <ArrowCard entry={post} lang={lang} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Tech Stack Section -->
+      <section class="animate">
+        <div class="space-y-4">
+          <h2 class={heading}>{t("home.built")}</h2>
+          <div class="flex flex-wrap items-center gap-2 mt-5">
+            {stack.map(item => (
+              <StackCard
+                text={item.text}
+                icon={item.icon}
+                href={item.href}
+              />
+            ))}
+          </div>
+          <div>
+            {t("home.guest")}
+            <a href="https://www.solidjs.com/" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
+              <span class={linkText}>SolidJS</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Preview Section -->
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between items-baseline">
+            <h2 class={heading}>{t("home.recent.projects")}</h2>
+            <a href={localizePath("/projects", lang)} class={link}>
+              <span class={linkText}>{t("home.all.projects")}</span>
+            </a>
+          </div>
+          <ul class="space-y-4">
+            {projects.map((project) => (
+              <li>
+                <ArrowCard entry={project} lang={lang} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="animate">
+        <div>
+          <h2 class={heading}>{t("home.connect")}</h2>
+          <p>{t("home.connect.text")}</p>
+          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
+            {SOCIALS.map(social => (
+              <div class="col-span-1 flex items-center gap-1">
+                <span class="whitespace-nowrap truncate">
+                  {social.NAME}
+                </span>
+              </div>
+              <div class="col-span-3 truncate">
+                <a href={social.HREF} target="_blank" class={link}>
+                  <span class={linkText}>{social.TEXT}</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</PageLayout>

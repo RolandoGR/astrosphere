@@ -1,13 +1,22 @@
 ---
+import { langFromUrl, langs, localizePath, barePath, defaultLang } from "@i18n/index"
+
 interface Props {
   title: string
   description: string
   image?: string
+  type?: "website" | "article"
+  jsonLd?: object | object[]
+  alternates?: boolean
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const { title, description, image = "/open-graph.jpg", type = "website", jsonLd, alternates = true } = Astro.props
 
-const { title, description, image = "/open-graph.jpg" } = Astro.props
+const lang = langFromUrl(Astro.url)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const imageURL = new URL(image, Astro.site)
+const ogLocales = { en: "en_US", es: "es_MX" }
+const bare = barePath(Astro.url)
 ---
 
 <!-- Global Metadata -->
@@ -17,12 +26,18 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#f3f0ff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#05040f" media="(prefers-color-scheme: dark)" />
 
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin>
 
-<!-- Canonical URL -->
+<!-- Canonical URL and the same page in each language -->
 <link rel="canonical" href={canonicalURL} />
+{alternates && langs.map((l) => (
+  <link rel="alternate" hreflang={l} href={new URL(localizePath(bare, l), Astro.site)} />
+))}
+{alternates && <link rel="alternate" hreflang="x-default" href={new URL(localizePath(bare, defaultLang), Astro.site)} />}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -30,26 +45,31 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={imageURL} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:locale" content={ogLocales[lang]} />
+{langs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={imageURL} />
+
+<!-- Structured data -->
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
 <!-- Sitemap -->
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- RSS Feed -->
-<link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
+<link rel="alternate" type="application/rss+xml" title={title} href={new URL(localizePath("/rss.xml", lang), Astro.site)}/>
 
 <!-- Global Scripts -->
 <script is:inline src="/js/theme.js"></script>

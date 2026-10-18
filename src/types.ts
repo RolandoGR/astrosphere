@@ -1,14 +1,15 @@
-export type Page = {
-  TITLE: string
-  DESCRIPTION: string
-}
+import type { UiKey } from "@i18n/ui"
 
-export interface Site extends Page {
+export type Site = {
+  TITLE: string
   AUTHOR: string
+  JOB_TITLE: string
+  LOCALITY: string
+  COUNTRY: string
 }
 
 export type Links = {
-  TEXT: string
+  KEY: UiKey
   HREF: string
 }[]
 
