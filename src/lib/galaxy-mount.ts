@@ -3,7 +3,7 @@
 // the WebGL context). Handles theme, pointer, clicks, scroll, visibility
 // and reduced motion.
 import { createGalaxy } from "@lib/galaxy"
-import { createGalaxyGL } from "@lib/galaxy-gl"
+import { createGalaxyGL, type GalaxyParams } from "@lib/galaxy-gl"
 
 type Layout = {
   center: (w: number, h: number) => [number, number]
@@ -22,6 +22,7 @@ type Engine = {
 }
 
 type Options = Layout & {
+  params?: Partial<GalaxyParams> // look of the WebGL galaxy (see defaultParams)
   stars: number         // WebGL star count
   fallbackStars: number // 2D star count
   scroll?: boolean      // tilt and fade the galaxy as the page scrolls past it
@@ -34,7 +35,8 @@ export function mountGalaxy(section: HTMLElement, options: Options) {
   let canvas = section.querySelector("canvas")!
 
   function create(webgl: boolean): Engine {
-    const engine = webgl ? createGalaxyGL(canvas, { ...layout, stars: options.stars, intro: !reduced }) : null
+    const params = { ...options.params, stars: options.stars, intro: !reduced && (options.params?.intro ?? true) }
+    const engine = webgl ? createGalaxyGL(canvas, { ...layout, params }) : null
     section.dataset.galaxy = engine ? "webgl" : "canvas"
     return engine ?? createGalaxy(canvas, { ...layout, count: options.fallbackStars })
   }
