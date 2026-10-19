@@ -33,6 +33,15 @@ html.dark {
   background-color: black;
 }
 
+/* Brand teal for the logo, a bit lighter on dark backgrounds */
+:root {
+  --brand-accent: #0f8f83;
+}
+
+html.dark {
+  --brand-accent: #2dd4bf;
+}
+
 html,
 body {
   @apply h-full w-full antialiased;

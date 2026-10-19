@@ -1,16 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Orbit mark: an "R" with a planet on a tilted orbit -->
-    <symbol id="brand" viewBox="0 0 64 64">
-      <g transform="rotate(-28 32 32)">
-        <path d="M4 32a28 11 0 0 0 56 0" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round" opacity=".6"/>
-      </g>
-      <path d="M23 46V18h11.5a8 8 0 0 1 0 16H23m11 0 9.5 12" fill="none" stroke="currentColor" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
-      <g transform="rotate(-28 32 32)">
-        <path d="M60 32a28 11 0 0 0-56 0" fill="none" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
-        <circle r="4" fill="#22d3ee">
-          <animateMotion dur="6s" repeatCount="indefinite" path="M4 32a28 11 0 1 0 56 0a28 11 0 1 0-56 0"/>
-        </circle>
+    <!-- Slanted rg ligature: the r takes the text color, the g the brand teal (CSS variable brand-accent) -->
+    <symbol id="brand" viewBox="6 11 48 48">
+      <g transform="translate(7.3 0) skewX(-12)" fill="none" stroke-width="8" stroke-linecap="round">
+        <path d="M12 41V20" stroke="currentColor"/>
+        <path d="M12 28c0-6 4-9 10-9" stroke="currentColor"/>
+        <circle cx="39" cy="28" r="9.5" stroke="var(--brand-accent, #0f8f83)"/>
+        <path d="M48.5 25v15c0 6.5-4 10-10.5 10" stroke="var(--brand-accent, #0f8f83)"/>
       </g>
     </symbol>
   </defs>
