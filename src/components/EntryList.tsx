@@ -48,7 +48,7 @@ export default function EntryList({ data, tags, lang }: Props) {
               {(tag) => (
                 <li>
                   <button onClick={() => toggleTag(tag)} class={cn("w-full px-2 py-1 rounded", "whitespace-nowrap overflow-hidden overflow-ellipsis", "flex gap-2 items-center", "bg-black/5 dark:bg-white/10", "hover:bg-black/10 hover:dark:bg-white/15", "transition-colors duration-300 ease-in-out", filter().has(tag) && "text-black dark:text-white")}>
-                    <svg class={cn("size-5 fill-black/50 dark:fill-white/50", "transition-colors duration-300 ease-in-out", filter().has(tag) && "fill-violet-600 dark:fill-violet-300")}>
+                    <svg class={cn("size-5 fill-black/50 dark:fill-white/50", "transition-colors duration-300 ease-in-out", filter().has(tag) && "fill-teal-700 dark:fill-teal-300")}>
                       <use href={`/ui.svg#square`} class={cn(!filter().has(tag) ? "block" : "hidden")} />
                       <use href={`/ui.svg#square-check`} class={cn(filter().has(tag) ? "block" : "hidden")} />
                     </svg>

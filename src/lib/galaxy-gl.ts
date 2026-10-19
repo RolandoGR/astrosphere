@@ -9,7 +9,7 @@
 // Every visual choice is a parameter (GalaxyParams), so the look can be tuned
 // live; the galaxy lab uses setParams() for that.
 
-export type Palette = "realistic" | "brand" | "aurora" | "mono" | "ember"
+export type Palette = "realistic" | "brand" | "aurora" | "mono" | "ember" | "teal"
 
 export type GalaxyParams = {
   // Shape
@@ -76,6 +76,7 @@ const palettes: Record<Palette, { stops: Rgb[]; core: Rgb; nebula: Rgb; sky: Rgb
   brand: { stops: [[0.55, 0.36, 0.96], [0.77, 0.71, 0.99], [0.13, 0.83, 0.93]], core: [0.82, 0.88, 1], nebula: [0.45, 0.3, 0.95], sky: [[0.3, 0.12, 0.55], [0.05, 0.4, 0.55]] },
   aurora: { stops: [[0.18, 0.83, 0.75], [0.65, 0.55, 0.98], [0.96, 0.45, 0.71]], core: [0.88, 0.95, 1], nebula: [0.18, 0.83, 0.75], sky: [[0.05, 0.35, 0.4], [0.3, 0.12, 0.45]] },
   mono: { stops: [[0.62, 0.68, 0.95], [0.95, 0.96, 1], [0.6, 0.94, 1]], core: [1, 1, 1], nebula: [0.55, 0.6, 0.95], sky: [[0.12, 0.14, 0.3], [0.08, 0.2, 0.3]] },
+  teal: { stops: [[0.18, 0.72, 0.66], [0.88, 0.98, 0.96], [0.4, 0.88, 1]], core: [0.92, 1, 0.98], nebula: [0.18, 0.75, 0.68], sky: [[0.04, 0.24, 0.24], [0.03, 0.16, 0.26]] },
   ember: { stops: [[0.98, 0.45, 0.09], [0.98, 0.75, 0.14], [1, 0.95, 0.8]], core: [1, 0.88, 0.66], nebula: [0.98, 0.3, 0.2], sky: [[0.4, 0.1, 0.08], [0.35, 0.18, 0.05]] },
 }
 const ink = (c: Rgb): Rgb => [c[0] * 0.55, c[1] * 0.5, c[2] * 0.6]
@@ -317,15 +318,15 @@ void main() {
   float n2 = fbm(q * 1.7 - vec2(0.0, uTime * 0.009) + 5.0);
   float glow = exp(-dot(uv, uv) * 1.4);
 
-  vec3 dark = vec3(0.012, 0.009, 0.04)
+  vec3 dark = vec3(0.006, 0.018, 0.02)
     + uSky0 * pow(n1, 3.0) * 0.55 * uSky
     + uSky1 * pow(n2, 4.0) * 0.45 * uSky
     + mix(uSky0, uSky1, 0.3) * glow * 0.6 * uSky;
-  vec3 light = vec3(0.953, 0.941, 1.0)
+  vec3 light = vec3(0.933, 0.973, 0.965)
     - (vec3(1.0) - uSky0) * 0.12 * pow(n1, 3.0) * uSky
     - (vec3(1.0) - uSky1) * 0.1 * pow(n2, 4.0) * uSky
     - vec3(0.06, 0.08, 0.0) * glow * 0.5 * uSky;
-  vec3 base = mix(vec3(0.02, 0.016, 0.06), vec3(0.953, 0.941, 1.0), uLight);
+  vec3 base = mix(vec3(0.01, 0.03, 0.035), vec3(0.933, 0.973, 0.965), uLight);
   outColor = vec4(mix(base, mix(dark, light, uLight), uFade) * uAlpha, uAlpha);
 }`
 

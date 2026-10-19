@@ -12,7 +12,7 @@ type Props = {
 export default function ArrowCard({entry, lang, pill}: Props) {
     const t = useTranslations(lang)
     return (
-      <a href={entryUrl(entry)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 hover:border-violet-500/40 dark:hover:border-violet-300/40 transition-colors duration-300 ease-in-out">
+      <a href={entryUrl(entry)} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 hover:border-teal-500/40 dark:hover:border-teal-300/40 transition-colors duration-300 ease-in-out">
       <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
         <div class="flex flex-wrap items-center gap-2">
           {pill &&
