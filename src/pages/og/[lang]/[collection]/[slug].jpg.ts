@@ -36,8 +36,11 @@ const assets = (async () => {
     read(fontFile(500)),
     read(fontFile(700)),
   ])
-  // The favicon switches its "R" color with the theme; here it is always white
-  const whiteLogo = logo.toString().replace(/<style>[\s\S]*?<\/style>/, "").replace('class="r"', 'stroke="#ffffff"')
+  // The favicon switches colors with the theme; on the dark image it uses the dark-theme ones
+  const whiteLogo = logo.toString()
+    .replace(/<style>[\s\S]*?<\/style>/, "")
+    .replaceAll('class="r"', 'stroke="#ffffff"')
+    .replaceAll('class="g"', 'stroke="#2dd4bf"')
   // Rasterized, since an SVG nested inside Satori's SVG does not render
   const logoPng = await sharp(Buffer.from(whiteLogo)).resize(96, 96).png().toBuffer()
   return {

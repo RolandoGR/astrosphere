@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 11 48 48">
   <style>
-    .r { stroke: #0b0b14; }
-    @media (prefers-color-scheme: dark) { .r { stroke: #fff; } }
+    .r { stroke: #15131f; }
+    .g { stroke: #0f8f83; }
+    @media (prefers-color-scheme: dark) { .r { stroke: #fff; } .g { stroke: #2dd4bf; } }
   </style>
-  <g transform="rotate(-28 32 32)">
-    <path d="M4 32a28 11 0 0 0 56 0" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round"/>
-  </g>
-  <path class="r" d="M23 46V18h11.5a8 8 0 0 1 0 16H23m11 0 9.5 12" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  <g transform="rotate(-28 32 32)">
-    <path d="M60 32a28 11 0 0 0-56 0" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="56.2" cy="26.5" r="5" fill="#22d3ee"/>
+  <!-- Slanted rg ligature: heavier strokes than the full-size logo so it holds at 16 px -->
+  <g transform="translate(7.3 0) skewX(-12)" fill="none" stroke-width="8.6" stroke-linecap="round">
+    <path class="r" d="M12 41V20"/>
+    <path class="r" d="M12 28c0-6 4-9 10-9"/>
+    <circle class="g" cx="39" cy="28" r="9.5"/>
+    <path class="g" d="M48.5 25v15c0 6.5-4 10-10.5 10"/>
   </g>
 </svg>
