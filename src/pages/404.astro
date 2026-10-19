@@ -5,11 +5,11 @@ import PageLayout from "@layouts/PageLayout.astro"
 <!-- GitHub Pages serves this one page for every missing URL, so the
      Spanish text is swapped in on the client for paths under /es/ -->
 <PageLayout title="Page not found" description="This page drifted out of orbit." alternates={false}>
-  <section id="lost" class="relative h-svh min-h-[520px] w-full overflow-hidden bg-[#f3f0ff] dark:bg-[#05040f]">
+  <section id="lost" class="relative h-svh min-h-[520px] w-full overflow-hidden bg-[#eef8f6] dark:bg-[#03090b]">
     <canvas class="absolute inset-0 size-full" aria-hidden="true"></canvas>
     <div class="relative flex h-full items-center justify-center p-5 text-center font-display">
       <div>
-        <h1 class="animate text-8xl md:text-[10rem] font-bold leading-none tracking-tight bg-gradient-to-r from-violet-600 to-cyan-600 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
+        <h1 class="animate text-8xl md:text-[10rem] font-bold leading-none tracking-tight bg-gradient-to-r from-teal-700 to-cyan-600 bg-clip-text text-transparent dark:from-teal-300 dark:to-cyan-300">
           404
         </h1>
         <p class="animate mt-4 text-xl md:text-2xl font-semibold text-black dark:text-white" data-es="Perdido en el espacio">
@@ -19,7 +19,7 @@ import PageLayout from "@layouts/PageLayout.astro"
           This page drifted out of orbit, or it never existed.
         </p>
         <div class="animate flex flex-wrap gap-3 justify-center mt-8">
-          <a href="/" data-es-href="/es/" data-es="Volver al inicio" class="rounded-md bg-gradient-to-r from-violet-600 to-cyan-600 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
+          <a href="/" data-es-href="/es/" data-es="Volver al inicio" class="rounded-md bg-gradient-to-r from-teal-700 to-cyan-700 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
             Back to home
           </a>
           <a href="/search" data-es-href="/es/search" data-es="Buscar en el sitio" class="rounded-md border border-black/20 px-4 py-2 text-sm text-black hover:bg-black/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10 md:text-base blend">

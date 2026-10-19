@@ -67,11 +67,11 @@ export const GET: APIRoute = async ({ props }) => {
   const titleSize = title.length > 60 ? 52 : title.length > 36 ? 62 : 74
 
   const svg = await satori(
-    el("div", { width: 1200, height: 630, display: "flex", backgroundColor: "#05040f", backgroundImage: `url(${background})`, backgroundSize: "1200px 630px", fontFamily: "Space Grotesk", color: "#ffffff" }, [
+    el("div", { width: 1200, height: 630, display: "flex", backgroundColor: "#03090b", backgroundImage: `url(${background})`, backgroundSize: "1200px 630px", fontFamily: "Space Grotesk", color: "#ffffff" }, [
       el("div", { display: "flex", flexDirection: "column", justifyContent: "center", width: 760, height: "100%", padding: "0 72px" }, [
         el("div", { display: "flex", alignItems: "center" }, [
           el("img", { width: 48, height: 48, marginRight: 16 }, undefined, { src: logo, width: 48, height: 48 }),
-          el("div", { fontSize: 22, fontWeight: 500, letterSpacing: 6, color: "#a5b4fc" },
+          el("div", { fontSize: 22, fontWeight: 500, letterSpacing: 6, color: "#5eead4" },
             `ROLANDO.GR · ${t(entry.collection === "blog" ? "og.blog" : "og.projects").toUpperCase()}`),
         ]),
         el("div", { fontSize: titleSize, fontWeight: 700, lineHeight: 1.05, letterSpacing: -1, marginTop: 30 }, title),

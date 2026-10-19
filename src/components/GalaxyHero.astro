@@ -5,16 +5,16 @@ const lang = langFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<section id="hero" class="relative h-svh min-h-[560px] w-full overflow-hidden bg-[#f3f0ff] dark:bg-[#05040f]">
+<section id="hero" class="relative h-svh min-h-[560px] w-full overflow-hidden bg-[#eef8f6] dark:bg-[#03090b]">
   <canvas class="absolute inset-0 size-full" aria-hidden="true"></canvas>
   <div class="relative mx-auto flex h-full max-w-screen-lg items-end px-5 pb-[12vh] md:items-center md:pb-0">
     <div class="pointer-events-none max-w-xl font-display">
-      <p class="animate text-sm uppercase tracking-[0.28em] text-violet-700 dark:text-indigo-300 md:text-base">
+      <p class="animate text-sm uppercase tracking-[0.28em] text-teal-700 dark:text-teal-300 md:text-base">
         {t("home.hello")}
       </p>
       <h1 class="animate mt-3 text-5xl font-bold leading-[0.95] tracking-tight text-black dark:text-white md:text-7xl">
         Rolando<br/>
-        <span class="bg-gradient-to-r from-violet-600 to-cyan-600 bg-clip-text text-transparent dark:from-violet-300 dark:to-cyan-300">
+        <span class="bg-gradient-to-r from-teal-700 to-cyan-600 bg-clip-text text-transparent dark:from-teal-300 dark:to-cyan-300">
           García Ramos
         </span>
       </h1>
@@ -22,7 +22,7 @@ const t = useTranslations(lang)
         {t("home.tagline")}
       </p>
       <div class="animate pointer-events-auto mt-6 flex flex-wrap gap-3">
-        <a href={localizePath("/work", lang)} class="rounded-md bg-gradient-to-r from-violet-600 to-cyan-600 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
+        <a href={localizePath("/work", lang)} class="rounded-md bg-gradient-to-r from-teal-700 to-cyan-700 px-4 py-2 text-sm text-white hover:opacity-90 md:text-base blend">
           {t("home.cta.work")}
         </a>
         <a href={localizePath("/blog", lang)} class="rounded-md border border-black/20 px-4 py-2 text-sm text-black hover:bg-black/5 dark:border-white/25 dark:text-white dark:hover:bg-white/10 md:text-base blend">
