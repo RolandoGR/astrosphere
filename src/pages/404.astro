@@ -33,6 +33,7 @@ import PageLayout from "@layouts/PageLayout.astro"
 
 <script>
   import { mountGalaxy } from "@lib/galaxy-mount"
+  import { siteGalaxy } from "@lib/galaxy-look"
 
   if (location.pathname.startsWith("/es/")) {
     document.documentElement.lang = "es"
@@ -43,7 +44,8 @@ import PageLayout from "@layouts/PageLayout.astro"
 
   const section = document.getElementById("lost")!
   mountGalaxy(section, {
-    stars: section.clientWidth < 640 ? 20000 : 40000,
+    params: { ...siteGalaxy, scrollMode: "none" },
+    stars: section.clientWidth < 640 ? 16000 : 30000,
     fallbackStars: 2600,
     center: (w, h) => [w / 2, h * 0.4],
     radius: (w, h) => Math.min(w * 0.45, h * 0.6),
