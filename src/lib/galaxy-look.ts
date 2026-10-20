@@ -9,7 +9,7 @@ export const siteGalaxy: Partial<GalaxyParams> = {
   palette: "teal", colorBy: "radius", sprite: "square", starSize: 0.8, brightness: 1, twinkle: 0,
   nebulae: 0, dust: 0, sky: 0.4, bgStars: 2400,
   speed: 1.5, trails: 0, orbitLines: 0.55, orbitLineCount: 28,
-  tilt: 0.6, roll: -0.3, yaw: 0.1, distance: 3.2, autoSpin: 0, parallax: 1, scrollMode: "tilt",
+  tilt: 0.6, roll: -0.3, yaw: 0.1, distance: 3.2, autoSpin: 0, parallax: 0.25, scrollMode: "tilt",
   pointerMode: "repel", pointerRadius: 75, pointerStrength: 0.65,
   clickMode: "ripple", clickStrength: 1,
 }

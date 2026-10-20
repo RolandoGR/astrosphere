@@ -1,0 +1,11 @@
+{
+  "name": "Rolando García Ramos",
+  "short_name": "rolando.gr",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any maskable" }
+  ],
+  "theme_color": "#03090b",
+  "background_color": "#03090b",
+  "display": "browser"
+}
