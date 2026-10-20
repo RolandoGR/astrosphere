@@ -635,8 +635,9 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
       if (lost || !w || !h) return
       const t = ms / 1000
       if (start < 0) start = t
-      ptr.x += (ptr.tx - ptr.x) * 0.04
-      ptr.y += (ptr.ty - ptr.y) * 0.04
+      // Slow easing, so the camera drifts toward the pointer instead of snapping
+      ptr.x += (ptr.tx - ptr.x) * 0.025
+      ptr.y += (ptr.ty - ptr.y) * 0.025
       light += (lightTarget - light) * 0.12
       if (Math.abs(lightTarget - light) < 0.01) light = lightTarget
 

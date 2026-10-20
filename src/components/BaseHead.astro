@@ -22,9 +22,12 @@ const bare = barePath(Astro.url)
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
-<link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<!-- Icons: .ico for legacy and /favicon.ico requests, SVG for modern browsers,
+     plus the Apple and Android home screen icons. ?v= makes browsers drop cached old icons -->
+<link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
+<link rel="manifest" href="/site.webmanifest" />
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content="#eef8f6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#03090b" media="(prefers-color-scheme: dark)" />
