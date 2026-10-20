@@ -45,8 +45,8 @@ const t = useTranslations(lang)
   const small = hero.clientWidth < 640
 
   mountGalaxy(hero, {
-    params: siteGalaxy,
-    stars: small ? 18000 : 35000,
+    params: small ? { ...siteGalaxy, bgStars: 1200 } : siteGalaxy,
+    stars: small ? 12000 : 35000,
     fallbackStars: small ? 2400 : 4200,
     scroll: true,
     center: (w, h) => wide(w) ? [w * 0.7, h * 0.48] : [w * 0.5, h * 0.3],

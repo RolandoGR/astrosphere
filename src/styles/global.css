@@ -72,6 +72,15 @@ header.scrolled {
   @apply backdrop-blur-sm saturate-200;
 }
 
+/* Re-blurring the animated galaxy behind the header every frame is costly on phones */
+@media (max-width: 767px) {
+  header.scrolled {
+    @apply bg-white/90 dark:bg-black/80;
+    backdrop-filter: none;
+    filter: none;
+  }
+}
+
 article {
   @apply prose dark:prose-invert max-w-full pb-12;
 }
