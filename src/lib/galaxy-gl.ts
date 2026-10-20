@@ -330,6 +330,20 @@ void main() {
   outColor = vec4(mix(base, mix(dark, light, uLight), uFade) * uAlpha, uAlpha);
 }`
 
+// Stretches the low-resolution sky texture over the screen, with a little
+// dither so the smooth gradients don't band. Trails make it see-through.
+const BLIT_FS = `#version 300 es
+precision mediump float;
+uniform sampler2D uTex;
+uniform vec2 uViewportPx;
+uniform float uAlpha;
+out vec4 outColor;
+void main() {
+  vec3 c = texture(uTex, gl_FragCoord.xy / uViewportPx).rgb;
+  c += (fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) / 255.0;
+  outColor = vec4(c * uAlpha, uAlpha);
+}`
+
 function gauss() {
   let u = 0, v = 0
   while (!u) u = Math.random()
@@ -428,15 +442,17 @@ type GalaxyGLOptions = {
 // Returns null when WebGL2 is not available, so the caller can fall back to the 2D version
 export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions = {}) {
   const params: GalaxyParams = { ...defaultParams, ...opts.params }
-  // Trails need the previous frame, so the drawing buffer is kept
-  const gl = canvas.getContext("webgl2", { antialias: false, premultipliedAlpha: true, alpha: false, preserveDrawingBuffer: true })
+  // Only trails need the previous frame; keeping the buffer otherwise costs a copy per frame on phones
+  const preserveDrawingBuffer = opts.preserveBuffer ?? params.trails > 0
+  const gl = canvas.getContext("webgl2", { antialias: false, premultipliedAlpha: true, alpha: false, preserveDrawingBuffer })
   if (!gl) return null
 
-  let points: WebGLProgram, lines: WebGLProgram, sky: WebGLProgram
+  let points: WebGLProgram, lines: WebGLProgram, sky: WebGLProgram, blit: WebGLProgram
   try {
     points = compile(gl, POINT_VS, POINT_FS)
     lines = compile(gl, LINE_VS, LINE_FS)
     sky = compile(gl, SKY_VS, SKY_FS)
+    blit = compile(gl, SKY_VS, BLIT_FS)
   } catch (error) {
     console.warn("Galaxy shaders failed, using the 2D version", error)
     return null
@@ -486,14 +502,36 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
       return cache.get(name)!
     }
   }
-  const up = uniforms(points), ul = uniforms(lines), us = uniforms(sky)
+  const up = uniforms(points), ul = uniforms(lines), us = uniforms(sky), ub = uniforms(blit)
+
+  // The sky is smooth noise, so it is drawn into a texture at a third of the
+  // CSS resolution and stretched: most of the GPU work saved on phones
+  const SKY_SCALE = 1 / 3
+  const skyTex = gl.createTexture()
+  const skyFbo = gl.createFramebuffer()
+  let skyW = 1, skyH = 1
+  function sizeSky() {
+    skyW = Math.max(1, Math.round(w * SKY_SCALE))
+    skyH = Math.max(1, Math.round(h * SKY_SCALE))
+    gl!.bindTexture(gl!.TEXTURE_2D, skyTex)
+    gl!.texImage2D(gl!.TEXTURE_2D, 0, gl!.RGBA, skyW, skyH, 0, gl!.RGBA, gl!.UNSIGNED_BYTE, null)
+    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MIN_FILTER, gl!.LINEAR)
+    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_MAG_FILTER, gl!.LINEAR)
+    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_S, gl!.CLAMP_TO_EDGE)
+    gl!.texParameteri(gl!.TEXTURE_2D, gl!.TEXTURE_WRAP_T, gl!.CLAMP_TO_EDGE)
+    gl!.bindFramebuffer(gl!.FRAMEBUFFER, skyFbo)
+    gl!.framebufferTexture2D(gl!.FRAMEBUFFER, gl!.COLOR_ATTACHMENT0, gl!.TEXTURE_2D, skyTex, 0)
+    gl!.bindFramebuffer(gl!.FRAMEBUFFER, null)
+  }
 
   let w = 0, h = 0, dpr = 1
   let light = 0, lightTarget = 0
   let scroll = 0
   let lost = false
   let start = -1
-  let starCount = ranges.additive[1]
+  // Steps down on slow devices: 1 drops to 1x resolution, 2 and 3 draw fewer stars
+  let quality = 0
+  const starShare = () => [1, 1, 0.6, 0.35][quality]
   const click = { x: 0, z: 0, t: -100, mode: 0 }
   const ptr = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5, px: -1e4, py: -1e4 }
   const frames: number[] = []
@@ -574,12 +612,14 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
     setParams(next: Partial<GalaxyParams>) {
       const rebuild = REBUILD.some((key) => key in next && next[key] !== params[key])
       Object.assign(params, next)
-      if (rebuild) { ranges = buildParticlesInto(); starCount = ranges.additive[1] }
+      if (rebuild) ranges = buildParticlesInto()
     },
-    resize(width: number, height: number, ratio = Math.min(window.devicePixelRatio || 1, 2)) {
-      w = width; h = height; dpr = ratio
+    // Up to 2x pixel density on large screens, 1.5x on phones, 1x once quality drops
+    resize(width: number, height: number, ratio = Math.min(window.devicePixelRatio || 1, width < 768 ? 1.5 : 2)) {
+      w = width; h = height; dpr = quality >= 1 ? 1 : ratio
       canvas.width = Math.round(w * dpr)
       canvas.height = Math.round(h * dpr)
+      sizeSky()
     },
     setTheme(dark: boolean) { lightTarget = dark ? 0 : 1 },
     setScroll(progress: number) { scroll = clamp(progress, 0, 1) },
@@ -600,16 +640,18 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
       light += (lightTarget - light) * 0.12
       if (Math.abs(lightTarget - light) < 0.01) light = lightTarget
 
-      // Lighter load on slow devices: after the intro, drop resolution and stars once
-      if (frames.length < 90) {
-        if (lastFrame) frames.push(ms - lastFrame)
-        if (frames.length === 90) {
-          const avg = frames.slice(30).reduce((s, f) => s + f, 0) / 60
-          if (avg > 24 && dpr > 1) this.resize(w, h, 1)
-          if (avg > 30) starCount = Math.round(ranges.additive[1] * 0.5)
+      // Lighter load on slow devices: once the intro is over, check every 60
+      // frames and step down one quality level while the median frame is slow
+      if (lastFrame) frames.push(ms - lastFrame)
+      lastFrame = ms
+      if (frames.length >= 60) {
+        const median = [...frames].sort((a, b) => a - b)[30]
+        frames.length = 0
+        if (t - start > 2 && median > 21 && quality < 3) {
+          quality++
+          if (quality === 1 && dpr > 1) this.resize(w, h)
         }
       }
-      lastFrame = ms
 
       const cam = camera(t)
       const base = layout()
@@ -619,22 +661,36 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
       const over = () => gl!.blendFunc(gl!.ONE, gl!.ONE_MINUS_SRC_ALPHA)
       const glow = () => light > 0.5 ? over() : gl!.blendFunc(gl!.ONE, gl!.ONE)
 
-      gl!.viewport(0, 0, canvas.width, canvas.height)
       gl!.disable(gl!.DEPTH_TEST)
 
-      // Sky, opaque or see-through for trails
+      // Sky at low resolution into its texture...
+      const k = skyW / w
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, skyFbo)
+      gl!.viewport(0, 0, skyW, skyH)
+      gl!.disable(gl!.BLEND)
       gl!.useProgram(sky)
       gl!.bindVertexArray(skyVao)
       gl!.uniform3fv(us("uSky0"), palettes[params.palette].sky[0])
       gl!.uniform3fv(us("uSky1"), palettes[params.palette].sky[1])
-      gl!.uniform2f(us("uCenterPx"), cx * dpr, (h - cy) * dpr)
+      gl!.uniform2f(us("uCenterPx"), cx * k, (h - cy) * k)
       gl!.uniform2f(us("uParallax"), parallaxX, parallaxY)
-      gl!.uniform1f(us("uScalePx"), scale * dpr)
+      gl!.uniform1f(us("uScalePx"), scale * k)
       gl!.uniform1f(us("uTime"), t)
       gl!.uniform1f(us("uLight"), light)
       gl!.uniform1f(us("uFade"), cam.fade)
       gl!.uniform1f(us("uSky"), params.sky)
-      gl!.uniform1f(us("uAlpha"), 1 - clamp(params.trails, 0, 0.97))
+      gl!.uniform1f(us("uAlpha"), 1)
+      gl!.drawArrays(gl!.TRIANGLES, 0, 3)
+
+      // ...then stretched over the screen, opaque or see-through for trails
+      gl!.bindFramebuffer(gl!.FRAMEBUFFER, null)
+      gl!.viewport(0, 0, canvas.width, canvas.height)
+      gl!.useProgram(blit)
+      gl!.activeTexture(gl!.TEXTURE0)
+      gl!.bindTexture(gl!.TEXTURE_2D, skyTex)
+      gl!.uniform1i(ub("uTex"), 0)
+      gl!.uniform2f(ub("uViewportPx"), canvas.width, canvas.height)
+      gl!.uniform1f(ub("uAlpha"), 1 - clamp(params.trails, 0, 0.97))
       gl!.enable(gl!.BLEND)
       over()
       gl!.drawArrays(gl!.TRIANGLES, 0, 3)
@@ -676,7 +732,7 @@ export function createGalaxyGL(canvas: HTMLCanvasElement, opts: GalaxyGLOptions 
       gl!.uniform4f(up("uClick"), click.x, click.z, click.t, click.mode)
 
       glow()
-      gl!.drawArrays(gl!.POINTS, ranges.additive[0], Math.min(starCount, ranges.additive[1]))
+      gl!.drawArrays(gl!.POINTS, ranges.additive[0], Math.round(ranges.additive[1] * starShare()))
       if (light < 0.5 && ranges.dust[1] > 0) {
         over()
         gl!.drawArrays(gl!.POINTS, ranges.dust[0], ranges.dust[1])
